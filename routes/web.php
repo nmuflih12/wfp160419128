@@ -16,14 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('layout/conquer2');});
 
-Route::resource('listobat160419128', 'Obat160419128Controller');
+Route::resource('obat', 'Obat160419128Controller');
+Route::resource('kategoriobat', 'KategoriObat160419128Controller');
+Route::resource('suppliers','SupplierController');
+Route::resource('transaksi', 'TransactionController');
 
-Route::get('obatbatuk160419128', 'Obat160419128Controller@showBatuk');
-
-Route::get('daftarkategori160419128', 'Obat160419128Controller@showDaftarKategori');
-
-Route::get('stokobatdikit160419128', 'Obat160419128Controller@showStokObat');
-
-Route::get('daftartransaksi', 'TransactionController@DaftarTransaksi');
+//Route::get('daftartransaksi', 'TransactionController@DaftarTransaksi')->name('Daftar Transaksi');
 
 Route::get('rinciantransaksi/{id}', 'TransactionController@RincianTransaksi'); //id otomatis langsung terlempar ke parameter di fun controller
+
+//uts
+Route::get('listobat160419128', 'Obat160419128Controller@index');
+Route::get('obatbatuk160419128', 'Obat160419128Controller@showBatuk');
+Route::get('daftarkategori160419128', 'Obat160419128Controller@showDaftarKategori');
+Route::get('stokobatdikit160419128', 'Obat160419128Controller@showStokObat');
+//uts

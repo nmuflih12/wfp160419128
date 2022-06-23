@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\KategoriObat160419128;
+use App\Suppliers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class KategoriObat160419128Controller extends Controller
      */
     public function index()
     {
-        //
+        $listdata=KategoriObat160419128::all();
+
+        return view('kategoriobat.index',compact('listdata'));
     }
 
     /**
@@ -25,7 +28,7 @@ class KategoriObat160419128Controller extends Controller
      */
     public function create()
     {
-        //
+        return view("kategoriobat.create");
     }
 
     /**
@@ -36,7 +39,11 @@ class KategoriObat160419128Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new KategoriObat160419128();
+        $data -> nama = $request -> get('inputName');
+        $data -> save();
+
+        return redirect()->route('kategoriobat.index')->with('status', 'Kategori obat telah ditambahkan!');
     }
 
     /**
@@ -56,9 +63,11 @@ class KategoriObat160419128Controller extends Controller
      * @param  \App\KategoriObat160419128  $kategoriObat160419128
      * @return \Illuminate\Http\Response
      */
-    public function edit(KategoriObat160419128 $kategoriObat160419128)
+    public function edit($id)
     {
-        //
+        $listkategori = KategoriObat160419128::find($id);
+
+        return view('kategoriobat.edit', compact('listkategori'));
     }
 
     /**
@@ -68,9 +77,14 @@ class KategoriObat160419128Controller extends Controller
      * @param  \App\KategoriObat160419128  $kategoriObat160419128
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KategoriObat160419128 $kategoriObat160419128)
+    public function update(Request $request, $id)
     {
-        //
+        $listkategori = KategoriObat160419128::find($id);
+
+        $listkategori -> nama = $request -> get('nama');
+        $listkategori -> save();
+
+        return redirect()->route('kategoriobat.index')->with('status', 'Kategori obat telah diubah!');
     }
 
     /**
@@ -79,8 +93,18 @@ class KategoriObat160419128Controller extends Controller
      * @param  \App\KategoriObat160419128  $kategoriObat160419128
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KategoriObat160419128 $kategoriObat160419128)
+    public function destroy($id)
     {
-        //
+        $kategoriobat = KategoriObat160419128::find($id);
+        //dd($kategoriobat);
+
+        try{
+            $kategoriobat -> delete();
+            return redirect() -> route('kategoriobat.index')->with('status', 'Data kategori obat berhasil dihapus.');
+        }catch(\PDOException $e){
+            $msg = "Data gagal dihapus. Pastikan data child sudah hilang atau tidak berhubungan!";
+
+            return redirect()->route('kategoriobat.index')->with('error', $msg);
+        }
     }
 }

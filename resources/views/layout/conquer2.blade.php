@@ -517,12 +517,42 @@ License: You must have a valid license purchased only from themeforest(the above
 				<li >
 					<a href="javascript:;">
 					<i class="icon-puzzle"></i>
-					<span class="title">Kelas</span>
+					<span class="title">Kerja Kelas</span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="/daftartransaksi">
+							<a href="/obat">
+							<i class="icon-pin"></i>
+							Daftar Obat</a>
+						</li>
+						<li>
+							<a href="/obat/create">
+							<i class="icon-pin"></i>
+							Tambah Obat (w9)</a>
+						</li>
+						<li>
+							<a href="/kategoriobat">
+							<i class="icon-pin"></i>
+							Daftar Kategori</a>
+						</li>
+						<li>
+							<a href="/kategoriobat/create">
+							<i class="icon-pin"></i>
+							Tambah Kategori (w9)</a>
+						</li>
+						<li>
+							<a href="/suppliers">
+							<i class="icon-pin"></i>
+							Daftar Supplier (W9)</a>
+						</li>
+						<li>
+							<a href="/suppliers/create">
+							<i class="icon-pin"></i>
+							Tambah Supplier (w9)</a>
+						</li>
+						<li>
+							<a href="/transaksi">
 							<i class="icon-pin"></i>
 							Daftar Transaksi (Week 8)</a>
 						</li>

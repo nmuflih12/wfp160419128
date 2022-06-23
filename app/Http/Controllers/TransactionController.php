@@ -15,10 +15,6 @@ class TransactionController extends Controller
      */
     public function index()
     {
-
-    }
-
-    public function DaftarTransaksi(){
         $listdata = Transaction::all();
 
         return view('transaction.index', compact('listdata'));

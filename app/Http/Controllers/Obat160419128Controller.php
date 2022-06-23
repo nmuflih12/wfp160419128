@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 //use App\KategoriObat160419128;
+
+use App\KategoriObat160419128;
 use App\Obat160419128;
+use App\Suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use League\CommonMark\Block\Element\ListData;
@@ -61,7 +64,10 @@ class Obat160419128Controller extends Controller
      */
     public function create()
     {
-        
+        $listkategoris = KategoriObat160419128::all();
+        $listsuppliers = Suppliers::all();
+
+        return view('obat160419128.create', compact('listkategoris', 'listsuppliers'));
     }
 
     /**
@@ -72,7 +78,17 @@ class Obat160419128Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Obat160419128();
+
+        $data -> nama_obat = $request -> get('nama_obat');
+        $data -> stok = $request -> get('stok');
+        $data -> harga = $request -> get('harga');
+        $data -> gambar = $request -> get('gambar');
+        $data -> kategori_id = $request -> get('kategori_id');
+        $data -> suppliers_id = $request -> get('suppliers_id');
+
+        $data->save();
+        return redirect()->route('obat.index')->with('status', 'Obat telah ditambahkan!');
     }
 
     /**
@@ -92,9 +108,13 @@ class Obat160419128Controller extends Controller
      * @param  \App\Obat160419128  $obat160419128
      * @return \Illuminate\Http\Response
      */
-    public function edit(Obat160419128 $obat160419128)
+    public function edit($id)
     {
-        //
+        $obat = Obat160419128::find($id);
+        $listkategoris = KategoriObat160419128::all();
+        $listsuppliers = Suppliers::all();
+
+        return view('obat160419128.edit', compact('obat', 'listkategoris', 'listsuppliers'));
     }
 
     /**
@@ -104,9 +124,19 @@ class Obat160419128Controller extends Controller
      * @param  \App\Obat160419128  $obat160419128
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Obat160419128 $obat160419128)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Obat160419128::find($id);
+
+        $data -> nama_obat = $request -> get('nama_obat');
+        $data -> stok = $request -> get('stok');
+        $data -> harga = $request -> get('harga');
+        $data -> gambar = $request -> get('gambar');
+        $data -> kategori_id = $request -> get('kategori_id');
+        $data -> suppliers_id = $request -> get('suppliers_id');
+
+        $data->save();
+        return redirect()->route('obat.index')->with('status', 'Obat telah diubah!');
     }
 
     /**

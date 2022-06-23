@@ -10,6 +10,6 @@ class KategoriObat160419128 extends Model
     
     public function obat()
     {
-        return $this->hasMany('App\Obat160419128', 'kategoriobat_id', 'id');
+        return $this->hasMany('App\Obat160419128', 'kategori_id', 'id');
     }
 }
